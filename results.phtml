@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Онлайн-викторина</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <topbar>
+            Добро пожаловать на сайт интеллектуальной викторины
+    </topbar>
+
+    <div id="clear"></div>
+
+    <navi>
+        <ul>
+            <li><a href="index.phtml">Вернуться на главную</a></li>
+        </ul>
+    </navi>
+
+    <content>
+        <restable>
+            <?php
+                ini_set('display_errors', 0);
+                ini_set('display_startup_errors', 0);
+                $con=mysqli_connect('localhost', 'root', 'root', 'kurs_data');
+                if($con==false) echo "Ошибка подключения к базе данных";
+                else{
+                        $req="SELECT * FROM results ORDER BY res_itog desc";
+                        $res=mysqli_query($con, $req);
+                        $kvo=mysqli_num_rows($res);
+                        if($res!=false){
+                            echo "<table border=\"1\">";
+                            echo "<tr> <td>Никнейм</td> <td>Баллов в вопросе №1</td> <td>Баллов в вопросе №2</td> <td>Баллов в вопросе №3</td> <td>Баллов в вопросе №4</td> <td>Баллов в вопросе №5</td> <td>Баллов итого</td>";
+                            $outp=mysqli_fetch_array($res);
+                            while($outp!=null){
+                                echo "<tr><td>".$outp['nickname']."</td><td>".$outp['res_1']."</td><td>".$outp['res_2']."</td><td>".$outp['res_3']."</td><td>".$outp['res_4']."</td><td>".$outp['res_5']."</td><td>".$outp['res_itog']."</td></tr>";
+                                $outp = mysqli_fetch_array($res);
+                            }
+                            echo "</table>";
+                        }
+                        else echo "Ошибка выполнения запроса";
+                }
+            ?>
+        </restable>
+    </content>
+
+    <div id="clear"></div>
+
+    <footer>
+            Автор работы - Смирнов С.В., ИКПИ-15
+    </footer>
+</body>
+</html>

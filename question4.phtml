@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Онлайн-викторина</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <topbar>
+            Добро пожаловать на сайт интеллектуальной викторины
+    </topbar>
+
+    <div id="clear"></div>
+
+    <navi>
+    Навигация по викторине
+        <ul>
+            <li><a href="question1.phtml">Вопрос 1</a></li>
+            <li><a href="question2.phtml">Вопрос 2</a></li>
+            <li><a href="question3.phtml">Вопрос 3</a></li>
+            <li><a href="question5.phtml">Вопрос 5</a></li>
+            <li><a href="check_res.phtml"> Закончить тест</a></li>
+        </ul>
+    </navi>
+    <content>
+        <question>
+            <h1>Вопрос 4</h1>
+            <p>Текст вопроса</p>
+            <p>Картинка к вопросу</p>
+            <form method="post" action="commit.php">
+                <input type="hidden" name="question_id" value=4>
+                <input type="hidden" name="next" value="question5.phtml">
+                <input type="radio" name="ansv" value=1> Ответ1 </input><br>
+                <input type="radio" name="ansv" value=2> Ответ2 </input><br>
+                <input type="radio" name="ansv" value=3> Ответ3 </input><br>
+                <input type="radio" name="ansv" value=4> Ответ4 </input><br>
+                <button type="submit">Далее</button>
+            </form>
+        </question>
+    </content>
+
+    <div id="clear"></div>
+    <footer>
+            Автор работы - Смирнов С.В., ИКПИ-15
+    </footer>
+</body>
+</html>
