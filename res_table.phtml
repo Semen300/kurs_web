@@ -1,0 +1,26 @@
+<link rel="stylesheet" type="text/css" href="styles.css">
+<content1>
+<?php
+                    ini_set('display_errors', 0);
+                    ini_set('display_startup_errors', 0);
+                    $con=mysqli_connect('localhost', 'root', 'root', 'kurs_data');
+                    if($con==false) echo "Ошибка подключения к базе данных";
+                    else{
+                            $req="SELECT * FROM results ORDER BY res_itog desc";
+                            $res=mysqli_query($con, $req);
+                            $kvo=mysqli_num_rows($res);
+                            if($res!=false){
+                                echo "<table border=\"1\" >";
+                                echo "<tr> <td align=\"center\">Никнейм</td> <td>Баллов в вопросе №1</td> <td>Баллов в вопросе №2</td> <td>Баллов в вопросе №3</td> <td>Баллов в вопросе №4</td> <td>Баллов в вопросе №5</td> <td>Баллов итого</td>";
+                                $outp=mysqli_fetch_array($res);
+                                while($outp!=null){
+                                    echo "<tr><td align=\"center\">".$outp['nickname']."</td><td align=\"center\">".$outp['res_1']."</td><td align=\"center\">".$outp['res_2']."</td><td align=\"center\">".$outp['res_3']."</td><td align=\"center\">".$outp['res_4']."</td><td align=\"center\">".$outp['res_5']."</td><td align=\"center\">".$outp['res_itog']."</td></tr>";
+                                    $outp = mysqli_fetch_array($res);
+                                }
+                                echo "</table>";
+                            }
+                            else echo "Ошибка выполнения запроса";
+                    }
+    ?>
+</div>
+</content>

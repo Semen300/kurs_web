@@ -7,55 +7,62 @@
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-    <topbar>
-            Добро пожаловать на сайт интеллектуальной викторины
-    </topbar>
+        <topbar>
+                Добро пожаловать на сайт интеллектуальной викторины
+        </topbar>
 
-    <div id="clear"></div>
+        <div id="clear"></div>
 
-    <navi>
-    Войдите, чтобы иметь доступ к навигации
-            <ul>
-                <li><a href="results.phtml"> Посмотреть статистику </a></li>
-            </ul>
-    </navi>
-    <content>
-            <p>Пожалуйста, зарегестрируйтесь</p>
-            <form method="post" action=''>
-                <label> <p>Введите имя пользователя</p></label>
-                <input name="nickname" type="text"><br><br>
-                <input type="submit">
-            </form>
-            <?php
-                        if(isset($_POST['nickname'])){
-                                $con=mysqli_connect('localhost', 'root', 'root', 'kurs_data');
-                                if($con==false) echo "Ошибка подключения к базе данных";
-                                else{
-                                        
-                                        $req="SELECT * FROM kurs_data.results where nickname='".$_POST['nickname']."'";
-                                        $res=mysqli_query($con, $req);
-                                        if($res==false) echo "Ошибка выполнения запроса к базе данных";
-                                        else if(mysqli_num_rows($res)!=0) echo "Такой пользователь уже существует!";
-                                        else{
-                                                $req_ins="INSERT INTO kurs_data.results(nickname) values ('".$_POST['nickname']."')";
-                                                if(mysqli_query($con, $req_ins)){
-                                                        session_start();
-                                                        $_SESSION['nickname'] = $_POST['nickname'];
-                                                        header("Location: question1.phtml");
-                                                }
+        <mblock>
+                <navi>
+                                <table>
+                                <tr><td align="center"><p>Войдите, чтобы иметь доступ к навигации</p></td></tr>
+                                <tr><td align="center"><a href="results.phtml"> Посмотреть статистику </a></td></tr>
+                                </table>
+                </navi>
+                <content>
+                        <question>
+                        <table>
+                        <tr><td align="center"><form method="post" action=''>
+                                <label>Пожалуйста, зарегестрируйтесь</label><br>
+                                <input name="nickname" type="text" placeholder="Введите имя пользователя"><br>
+                                <input type="submit">
+                        </form>
+                        </td></tr>
+                        </table>
+                        <?php
+                                        if(isset($_POST['nickname'])){
+                                                $con=mysqli_connect('localhost', 'root', 'root', 'kurs_data');
+                                                if($con==false) echo "Ошибка подключения к базе данных";
                                                 else{
-                                                        echo 'Ошибка добавления пользователя в базу данных <br>';
-                                                        echo $req_ins.'<br>';
+                                                        
+                                                        $req="SELECT * FROM kurs_data.results where nickname='".$_POST['nickname']."'";
+                                                        $res=mysqli_query($con, $req);
+                                                        if($res==false) echo "Ошибка выполнения запроса к базе данных";
+                                                        else if(mysqli_num_rows($res)!=0) echo "Такой пользователь уже существует!";
+                                                        else{
+                                                                $req_ins="INSERT INTO kurs_data.results(nickname) values ('".$_POST['nickname']."')";
+                                                                if(mysqli_query($con, $req_ins)){
+                                                                        session_start();
+                                                                        $_SESSION['nickname'] = $_POST['nickname'];
+                                                                        header("Location: question1.phtml");
+                                                                }
+                                                                else{
+                                                                        echo 'Ошибка добавления пользователя в базу данных <br>';
+                                                                        echo $req_ins.'<br>';
+                                                                }
+                                                                
+                                                        }
                                                 }
-                                                
                                         }
-                                }
-                        }
-                ?>
-    </content>
+                        ?>
+                        
+                        </question>
+                </content>
+        </mblock>
 
-    <div id="clear"></div>
-    <footer>
+        <div id="clear"></div>
+        <footer>
             Автор работы - Смирнов С.В., ИКПИ-15
     </footer>
 </body>

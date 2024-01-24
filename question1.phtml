@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Онлайн-викторина</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="confirm_fin.js"> </script>
 </head>
 <body>
     <topbar>
@@ -14,36 +15,117 @@
     <div id="clear"></div>
 
     <navi>
-    Навигация по викторине
-        <ul>
-            <li><a href="question2.phtml">Вопрос 2</a></li>
-            <li><a href="question3.phtml">Вопрос 3</a></li>
-            <li><a href="question4.phtml">Вопрос 4</a></li>
-            <li><a href="question5.phtml">Вопрос 5</a></li>
-            <li><a href="check.php"> Закончить тест</a></li>
-        </ul>
+                <table>
+                    <tr><td align="center"><p>Навигация по викторине:</p></td></tr>
+                    <tr><td align="center"><a href="question1.phtml">Вопрос 1</a></td></tr>
+                    <tr><td align="center"><a href="question2.phtml">Вопрос 2</a></td></tr>
+                    <tr><td align="center"><a href="question3.phtml">Вопрос 3</a></td></tr>
+                    <tr><td align="center"><a href="question4.phtml">Вопрос 4</a></td></tr>
+                    <tr><td align="center"><a href="question5.phtml">Вопрос 5</a></td></tr>
+                    <tr><td align="center"><a onclick="conf_fin('check.php')" > <u>Закончить тест</u></a></td></tr>
+                </table>
     </navi>
     <content>
         <question>
-            <h1>Вопрос 1</h1>
-            <p>Текст вопроса</p>
-            <p>Картинка к вопросу</p>
-            <form method="post" action="commit.php">
-                <input type="hidden" name="question_id" value=1>
-                <input type="hidden" name="nickname" value="">
-                <input type="hidden" name="next" value="question2.phtml">
-                <input type="radio" name="ansv" value=1> Ответ1 </input><br>
-                <input type="radio" name="ansv" value=2> Ответ2 </input><br>
-                <input type="radio" name="ansv" value=3> Ответ3 </input><br>
-                <input type="radio" name="ansv" value=4> Ответ4 </input><br>
-                <button type="submit">Далее</button>
-            </form>
+            <?php
+                $con=mysqli_connect('localhost','root','root','kurs_data');
+                session_start();
+                $res=mysqli_query($con, "SELECT ansv_1 FROM results WHERE nickname='".$_SESSION['nickname']."'");
+                if($res!=false){
+                    $val=mysqli_fetch_array($res);
+                    switch($val[0]){
+                        case 1:{
+                            echo '<table>';
+                            echo '<tr><td align="center"><h2>Вопрос 1</h2></td></tr>';
+                            echo '<tr><td align="center"><p>Текст вопроса</p></td></tr>';
+                            echo '<tr><td align="center"><form method="post" action="commit.php">';
+                            echo '<input type="hidden" name="question_id" value=1>';
+                            echo '<input type="hidden" name="next" value="question2.phtml">';
+                            echo '<label><input type="radio" name="ansv" value=1 checked> Ответ1 </input></label><br>';
+                            echo '<label><input type="radio" name="ansv" value=2> Ответ2 </input></label><br>';
+                            echo '<label><input type="radio" name="ansv" value=3> Ответ3 </input></label><br>';
+                            echo '<label><input type="radio" name="ansv" value=4> Ответ4 </input></label><br>';
+                            echo '<button type="submit">Далее</button>';
+                            echo '</form></td></tr>';
+                            echo '</table>';
+                            break;
+                        }
+                        case 2:{
+                            echo '<table>';
+                            echo '<tr><td align="center"><h2>Вопрос 1</h2></td></tr>';
+                            echo '<tr><td align="center"><p>Текст вопроса</p></td></tr>';
+                            echo '<tr><td align="center"><form method="post" action="commit.php">';
+                            echo '<input type="hidden" name="question_id" value=1>';
+                            echo '<input type="hidden" name="next" value="question2.phtml">';
+                            echo '<label><input type="radio" name="ansv" value=1> Ответ1 </input></label><br>';
+                            echo '<label><input type="radio" name="ansv" value=2 checked> Ответ2 </input></label><br>';
+                            echo '<label><input type="radio" name="ansv" value=3> Ответ3 </input></label><br>';
+                            echo '<label><input type="radio" name="ansv" value=4> Ответ4 </input></label><br>';
+                            echo '<button type="submit">Далее</button>';
+                            echo '</form></td></tr>';
+                            echo '</table>';
+                            break;
+                        }
+                        case 3:{
+                            echo '<table>';
+                            echo '<tr><td align="center"><h2>Вопрос 1</h2></td></tr>';
+                            echo '<tr><td align="center"><p>Текст вопроса</p></td></tr>';
+                            echo '<tr><td align="center"><form method="post" action="commit.php">';
+                            echo '<input type="hidden" name="question_id" value=1>';
+                            echo '<input type="hidden" name="next" value="question2.phtml">';
+                            echo '<label><input type="radio" name="ansv" value=1> Ответ1 </input></label><br>';
+                            echo '<label><input type="radio" name="ansv" value=2> Ответ2 </input></label><br>';
+                            echo '<label><input type="radio" name="ansv" value=3 checked> Ответ3 </input></label><br>';
+                            echo '<label><input type="radio" name="ansv" value=4> Ответ4 </input></label><br>';
+                            echo '<button type="submit">Далее</button>';
+                            echo '</form></td></tr>';
+                            echo '</table>';
+                            break;
+                        }
+                        case 4:{
+                            echo '<table>';
+                            echo '<tr><td align="center"><h2>Вопрос 1</h2></td></tr>';
+                            echo '<tr><td align="center"><p>Текст вопроса</p></td></tr>';
+                            echo '<tr><td align="center"><form method="post" action="commit.php">';
+                            echo '<input type="hidden" name="question_id" value=1>';
+                            echo '<input type="hidden" name="next" value="question2.phtml">';
+                            echo '<label><input type="radio" name="ansv" value=1> Ответ1 </input></label><br>';
+                            echo '<label><input type="radio" name="ansv" value=2> Ответ2 </input></label><br>';
+                            echo '<label><input type="radio" name="ansv" value=3> Ответ3 </input></label><br>';
+                            echo '<label><input type="radio" name="ansv" value=4 checked> Ответ4 </input></label><br>';
+                            echo '<button type="submit">Далее</button>';
+                            echo '</form></td></tr>';
+                            echo '</table>';
+                            break;
+                        }
+                        default:{
+                            echo '<table>';
+                            echo '<tr><td align="center"><h2>Вопрос 1</h2></td></tr>';
+                            echo '<tr><td align="center"><p>Текст вопроса</p></td></tr>';
+                            echo '<tr><td align="center"><form method="post" action="commit.php">';
+                            echo '<input type="hidden" name="question_id" value=1>';
+                            echo '<input type="hidden" name="next" value="question2.phtml">';
+                            echo '<label><input type="radio" name="ansv" value=1> Ответ1 </input></label><br>';
+                            echo '<label><input type="radio" name="ansv" value=2> Ответ2 </input></label><br>';
+                            echo '<label><input type="radio" name="ansv" value=3> Ответ3 </input></label><br>';
+                            echo '<label><input type="radio" name="ansv" value=4> Ответ4 </input></label><br>';
+                            echo '<button type="submit">Далее</button>';
+                            echo '</form></td></tr>';
+                            echo '</table>';
+                        }
+                    }
+                }
+                else echo "Ошибка выполнения запроса";
+                
+            ?>
         </question>
     </content>
 
     <div id="clear"></div>
     <footer>
+            <autograph>
             Автор работы - Смирнов С.В., ИКПИ-15
+            </autograph>
     </footer>
 </body>
 </html>
